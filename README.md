@@ -250,11 +250,41 @@ We welcome translations. See [`TRANSLATION.md`](TRANSLATION.md). A **Technical T
 
 ---
 
+## Supported LLM Providers
+
+The [`utilities/llm_provider.py`](utilities/llm_provider.py) module provides a
+single `complete()` function that works with multiple cloud LLM providers.
+Switch providers without changing agent code — just set `LLM_PROVIDER`:
+
+| Provider | `LLM_PROVIDER` value | API Key variable | Default model |
+|---|---|---|---|
+| **OpenAI** | `openai` (default) | `OPENAI_API_KEY` | `gpt-4o-mini` |
+| **Anthropic** | `anthropic` | `ANTHROPIC_API_KEY` | `claude-3-5-haiku-20241022` |
+| **MiniMax** | `minimax` | `MINIMAX_API_KEY` | `MiniMax-M2.7` |
+
+**MiniMax** ([platform.minimaxi.com](https://platform.minimaxi.com/)) offers
+the M2.7 and M2.5 model families with a 204 K-token context window via an
+OpenAI-compatible API endpoint at `https://api.minimax.io/v1`.
+
+```python
+from utilities.llm_provider import complete
+
+# Use MiniMax M2.7 (set MINIMAX_API_KEY first)
+response = complete(
+    "Summarise the main agent frameworks in the LLM ecosystem.",
+    provider="minimax",
+    model="MiniMax-M2.7",
+)
+print(response)
+```
+
+---
+
 ## Interactive Demos & Resources
 
 ### Web Apps
 
-- **Streamlit Summariser** – [`web_apps/streamlit_summarizer`](web_apps/streamlit_summarizer)  
+- **Streamlit Summariser** – [`web_apps/streamlit_summarizer`](web_apps/streamlit_summarizer) (supports `openai`, `anthropic`, `minimax` via `LLM_PROVIDER`)
 - **Gradio FAQ Bot** – [`web_apps/gradio_faq_bot`](web_apps/gradio_faq_bot)
 
 ### Jupyter Notebooks
