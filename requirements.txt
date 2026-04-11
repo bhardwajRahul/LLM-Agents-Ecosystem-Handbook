@@ -4,3 +4,6 @@ streamlit
 pandas
 numpy
 pytest
+# Cloud LLM providers (install whichever you use)
+openai>=1.0.0         # required for OpenAI and MiniMax (OpenAI-compatible API)
+anthropic             # optional: for Anthropic Claude models
